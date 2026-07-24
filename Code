@@ -1,0 +1,9 @@
+# Table for Hypertension
+#Code: table(row, column)
+hyptab <- table(datnoage$com_hyp, datnoage$med_aht)
+hyptab
+
+
+#Table for Diabetes
+dmtab <- table(datnoage$com_diab, datnoage$med_gla)
+dmtab
