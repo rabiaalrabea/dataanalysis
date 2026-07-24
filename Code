@@ -7,3 +7,8 @@ hyptab
 #Table for Diabetes
 dmtab <- table(datnoage$com_diab, datnoage$med_gla)
 dmtab
+
+#Table of percentages
+# Ref: https://stackoverflow.com/questions/15866488/is-it-possible-to-add-percentages-to-a-contingency-table
+prop.table(dmtab)
+prop.table(hyptab)
