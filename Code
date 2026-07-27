@@ -1,3 +1,149 @@
+### Exclude patinet Under 18 years old.
+# Ref: https://www.udacity.com/blog/creating-subsets-in-r-filtering-and-selecting-data-with-precision/ ###
+datnoage <- subset(dat, subset = age >= 18)
+
+### Histogram, QQplotfor and Shapiro-Wilk test for Variables: ###
+
+#Age
+hist(datnoage$age, main = "Histogram of age", xlab = "age")
+qqnline(datnoage$age, col = "red")
+shapiro.test(datnoage$age)
+
+#BMI
+hist(datnoage$lab_bmi, main = "Histogram of BMI", xlab = "BMI")
+qqnline(datnoage$lab_bmi, col = "red")
+shapiro.test(datnoage$bmi)
+
+#CRP
+hist(datnoage$lab_crp, main = "Histogram of CRP", xlab = "CRP")
+qqnline(datnoage$lab_crp, col = "red")
+shapiro.test(datnoage$lab_crp)
+
+#eGFR
+hist(datnoage$lab_egfr, main = "Histogram of eGFR", xlab = "eGFR")
+qqnline(datnoage$lab_egfr, col = "red")
+shapiro.test(datnoage$lab_egfr)
+
+#Glucose NF
+hist(datnoage$lab_gluc_nf, main = "Histogram of Glucose", xlab = "Glucose")
+qqnline(datnoage$lab_gluc_nf, col = "red")
+shapiro.test(datnoage$lab_gluc_nf)
+
+#Hemoglobin
+hist(datnoage$lab_hb, main = "Histogram of Hemoglobin", xlab = "Hemoglobin")
+qqnline(datnoage$lab_hb, col = "red")
+shapiro.test(datnoage$lab_hb)
+
+#Time to Event
+hist(datnoage$tte, main = "Histogram of Time-to-event", xlab = "Time to Event")
+qqnline(datnoage$tte, col = "red")
+shapiro.test(datnoage$tte)
+
+### Mean and SD (+Min and Max) for Nomrally distrubated Variables: ###
+
+# Age:
+mean(datnoage$age)
+sd(datnoage$age)
+min(datnoage$age)
+max(datnoage$age)
+
+#Hemoglobin: 
+mean(datnoage$lab_hb)
+sd(datnoage$lab_hb)
+min(datnoage$lab_hb)
+max(datnoage$lab_hb)
+
+### Median and IQR for Non-Normally distrubated Variables: ###
+# Ref: https://www.r-tutor.com/elementary-statistics/numerical-measures/quartile
+
+# BMI:
+quantile(datnoage$lab_bmi)
+
+#CRP:
+quantile(datnoage$lab_crp)
+
+#eGFR: 
+quantile(datnoage$lab_egfr)
+
+#Glucose:
+quantile(datnoage$lab_gluc_nf)
+
+#Time to event:
+quantile(datnoage$tte)
+
+### Counts and Percentages for Binary Variables ###
+
+#Female:
+sum(datnoage$female)
+sum(datnoage$female)/4015 * 100
+
+#Arrythemia
+sum(datnoage$com_arr)
+sum(datnoage$com_arr)/4015 * 100
+
+#CAD
+sum(datnoage$com_cad)
+sum(datnoage$com_cad)/4015 * 100
+
+#Cerebrovascular disease
+sum(datnoage$com_cbvd)
+sum(datnoage$com_cbvd)/4015 * 100
+
+#DM
+sum(datnoage$com_diab)
+sum(datnoage$com_diab)/4015 * 100
+
+#Heart failure
+sum(datnoage$com_hf)
+sum(datnoage$com_hf)/4015 * 100
+
+#Hypertension
+sum(datnoage$com_hyp)
+sum(datnoage$com_hyp)/4015 * 100
+
+#Malignancy
+sum(datnoage$com_mal)
+sum(datnoage$com_mal)/4015 * 100
+
+#Antithrombotic agents
+sum(datnoage$med_ata)
+sum(datnoage$med_ata)/4015 * 100
+
+#Contrast-use
+sum(datnoage$ihe_ctr)
+sum(datnoage$ihe_ctr)/4015 * 100
+
+#Antihypertensive drugs
+sum(datnoage$med_aht)
+sum(datnoage$med_aht)/4015 * 100
+
+#Glucose lowering agents
+sum(datnoage$med_gla)
+sum(datnoage$med_gla)/4015 * 100
+
+#Immunosuppressants
+sum(datnoage$med_ims)
+sum(datnoage$med_ims)/4015 * 100
+
+#Lipid-lowering agents:
+sum(datnoage$med_lla)
+sum(datnoage$med_lla)/4015 * 100
+
+#Nephrotoxic drugs
+sum(datnoage$med_ntd)
+sum(datnoage$med_ntd)/4015 * 100
+
+#Death
+sum(datnoage$death)
+sum(datnoage$death)/4015 * 100
+
+#AKI stages
+sum(datnoage$aki_stage)
+sum(datnoage$aki_stage)/4015 * 100
+
+
+### Cross-Validation ###
+
 # Table for Hypertension
 #Code: table(row, column)
 hyptab <- table(datnoage$com_hyp, datnoage$med_aht)
