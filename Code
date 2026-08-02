@@ -232,3 +232,13 @@ datalca$lab_gluc_nf <- as.numeric(datalca$lab_gluc_nf)
 datalca$lab_hb <- as.numeric(datalca$lab_hb)
 datalca$lab_hb <- as.numeric(datalca$lab_hb)
 datalca$lab_hb <- as.numeric(datalca$lab_hb) + 1 
+
+
+### Fit models with poLCA ###
+# New data name
+lcadata <- datalca
+
+# Bind variables
+library(poLCA)
+
+f <- cbind(lcadata$age, lcadata$aki_stage, lcadata$female, lcadata$com_arr, lcadata$com_cad, lcadata$com_cbvd, lcadata$com_diab, lcadata$com_hf, lcadata$com_hyp, lcadata$com_mal, lcadata$ihe_ctr, lcadata$lab_bmi, lcadata$lab_crp, lcadata$lab_egfr, lcadata$lab_gluc_nf, lcadata$lab_hb, lcadata$med_aht, lcadata$med_ata, lcadata$med_gla, lcadata$med_ims, lcadata$med_lla, lcadata$med_ntd, lcadata$death) ~ 1
