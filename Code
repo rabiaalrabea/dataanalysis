@@ -198,6 +198,24 @@ catdat <- catdat %>% mutate(lab_hb = case_when(female == 0 & lab_hb > 10.2 ~ 2, 
 catdat <- catdat %>% mutate(lab_hb = case_when(female == 0 & lab_hb >= 8.1 & lab_hb <= 10.1999 ~ 1, TRUE ~ lab_hb))
 catdat <- catdat %>% mutate(lab_hb = case_when(female == 0 & lab_hb < 8.0999 ~ 0, TRUE ~ lab_hb))
 
+### poLCA doesn't accept value [0, negative] ###
+# Turn binary values into 1/2 instead of 0/1 
 
+ datalca$female <- datalca$female + 1
+ datalca$com_arr <- datalca$com_arr + 1
+ datalca$com_cad <- datalca$com_cad + 1
+ datalca$com_cbvd <- datalca$com_cbvd + 1
+ datalca$com_diab <- datalca$com_diab + 1
+ datalca$com_hf <- datalca$com_hf + 1
+ datalca$com_hyp <- datalca$com_hyp + 1
+ datalca$com_mal <- datalca$com_mal + 1
+ datalca$ihe_ctr <- datalca$ihe_ctr + 1
+ datalca$med_aht <- datalca$med_aht + 1
+ datalca$med_ata <- datalca$med_ata + 1
+ datalca$med_gla <- datalca$med_gla + 1
+ datalca$med_ims <- datalca$med_ims + 1
+ datalca$med_lla <- datalca$med_lla + 1
+ datalca$med_ntd <- datalca$med_ntd + 1
+ datalca$death <- datalca$death + 1
 
 
