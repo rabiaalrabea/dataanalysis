@@ -241,4 +241,5 @@ lcadata <- datalca
 # Bind variables
 library(poLCA)
 
-f <- cbind(lcadata$age, lcadata$aki_stage, lcadata$female, lcadata$com_arr, lcadata$com_cad, lcadata$com_cbvd, lcadata$com_diab, lcadata$com_hf, lcadata$com_hyp, lcadata$com_mal, lcadata$ihe_ctr, lcadata$lab_bmi, lcadata$lab_crp, lcadata$lab_egfr, lcadata$lab_gluc_nf, lcadata$lab_hb, lcadata$med_aht, lcadata$med_ata, lcadata$med_gla, lcadata$med_ims, lcadata$med_lla, lcadata$med_ntd, lcadata$death) ~ 1
+f <- cbind(age ,aki_stage ,female ,com_arr ,com_cad ,com_cbvd ,com_diab ,com_hf ,com_hyp ,com_mal ,ihe_ctr ,lab_bmi ,lab_crp ,lab_egfr ,lab_gluc_nf ,lab_hb ,med_aht ,med_ata ,med_gla ,med_ims ,med_lla ,med_ntd ,death) ~ 1
+m1 <- poLCA(f, data = lcadata, nclass = 2, graphs = TRUE, na.rm = TRUE)
