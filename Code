@@ -188,7 +188,15 @@ catdat$lab_gluc_nf <- cut(catdat$lab_gluc_nf, breaks = c(-Inf, 4, 7.8, 11, Inf),
 catdat$age <- cut(catdat$age , breaks = c(18, 25, 45, 61, 75, Inf), labels = c(0, 1, 2, 3, 4), right = FALSE, include.lowest = TRUE)
 
 #Hemoglobin
+#Female
+catdat <- catdat %>% mutate(lab_hb = case_when(female == 1 & lab_hb < 7.5 ~ 0, TRUE ~ lab_hb))
+catdat <- catdat %>% mutate(lab_hb = case_when(female == 1 & lab_hb >= 7.5 & lab_hb <= 9.99 ~ 1, TRUE ~ lab_hb))
+catdat <- catdat %>% mutate(lab_hb = case_when(female == 1 & lab_hb > 9.99 ~ 2, TRUE ~ lab_hb))
 
+#Male
+catdat <- catdat %>% mutate(lab_hb = case_when(female == 0 & lab_hb > 10.2 ~ 2, TRUE ~ lab_hb))
+catdat <- catdat %>% mutate(lab_hb = case_when(female == 0 & lab_hb >= 8.1 & lab_hb <= 10.1999 ~ 1, TRUE ~ lab_hb))
+catdat <- catdat %>% mutate(lab_hb = case_when(female == 0 & lab_hb < 8.0999 ~ 0, TRUE ~ lab_hb))
 
 
 
