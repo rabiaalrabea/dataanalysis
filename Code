@@ -222,6 +222,13 @@ datalca <- catdat
  datalca$death <- datalca$death + 1
 
 # Turn categorical values to start from 1 instead of 0
+# Ref : https://www.geeksforgeeks.org/r-language/as-numeric-function-in-r/
 
 
-
+datalca$lab_bmi <- as.numeric(datalca$lab_bmi)
+datalca$lab_crp <- as.numeric(datalca$lab_crp)
+datalca$lab_egfr <- as.numeric(datalca$lab_egfr)
+datalca$lab_gluc_nf <- as.numeric(datalca$lab_gluc_nf)
+datalca$lab_hb <- as.numeric(datalca$lab_hb)
+datalca$lab_hb <- as.numeric(datalca$lab_hb)
+datalca$lab_hb <- as.numeric(datalca$lab_hb) + 1 
