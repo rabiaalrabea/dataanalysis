@@ -247,3 +247,6 @@ m1 <- poLCA(f, data = lcadata, nclass = 2, graphs = TRUE, na.rm = TRUE)
 
 ### Turn the variables to factor ###
 #Ref: https://www.listendata.com/2015/05/converting-multiple-numeric-variables.html
+
+numericvar <- c("female", "com_arr", "com_cad", "com_cbvd", "com_diab", "com_hf", "com_hyp", "com_mal", "ihe_ctr", "lab_bmi", "lab_crp", "lab_egfr", "lab_gluc_nf", "lab_hb", "med_aht", "med_ata", "med_gla", "med_ims", "med_lla", "med_ntd", "death")
+flca[numericvar] <- lapply(flca[numericvar], as.factor)
