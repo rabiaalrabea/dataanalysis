@@ -289,3 +289,22 @@ fit_grid1 <- map_df(1:12, function(k){
 +     mod1 <- poLCA(form, data = newdata, nclass = k, nrep = 20, verbose = FALSE)
 +     tibble(k =k, bic = mod1$bic, aic = mod1$aic, logLik = mod1$llik, npar = mod1$npar)
 +     })
+
+fit_grid_long1 <- pivot_longer(
++     fit_grid1,
++     cols = c(bic, aic),
++     names_to = "criterion",
++     values_to = "value"
++ )
+> 
+> ggplot(fit_grid_long1, aes(x = k, y = value, color = criterion)) +
++     geom_line() +
++     geom_point() +
++     labs(
++         x = "Number of Classes",
++         y = "Fit Statistic",
++         title = "LCA Model Fit Comparison"
++     ) +
++     theme_minimal()
+
+
