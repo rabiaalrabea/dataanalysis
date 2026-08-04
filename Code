@@ -221,7 +221,7 @@ datalca <- catdat
  datalca$med_ntd <- datalca$med_ntd + 1
  datalca$death <- datalca$death + 1
 
-# Turn categorical values to start from 1 instead of 0
+# Turn Numeric values to start from 1 instead of 0
 # Ref : https://www.geeksforgeeks.org/r-language/as-numeric-function-in-r/
 
 
@@ -250,3 +250,42 @@ m1 <- poLCA(f, data = lcadata, nclass = 2, graphs = TRUE, na.rm = TRUE)
 
 numericvar <- c("female", "com_arr", "com_cad", "com_cbvd", "com_diab", "com_hf", "com_hyp", "com_mal", "ihe_ctr", "lab_bmi", "lab_crp", "lab_egfr", "lab_gluc_nf", "lab_hb", "med_aht", "med_ata", "med_gla", "med_ims", "med_lla", "med_ntd", "death")
 flca[numericvar] <- lapply(flca[numericvar], as.factor)
+
+### Method 2 ###
+#Ref: https://www.youtube.com/watch?v=KH2UJbtFaYg
+## Turn Numeric variables into factors ## 
+numericvar <- c("female", "com_arr", "com_cad", "com_cbvd", "com_diab", "com_hf", "com_hyp", "com_mal", "ihe_ctr", "lab_bmi", "lab_crp", "lab_egfr", "lab_gluc_nf", "lab_hb", "med_aht", "med_ata", "med_gla", "med_ims", "med_lla", "med_ntd", "death", "aki_stage")
+newdata <- datalca
+newdata[numericvar] <- lapply(numericvar[f1], as.factor)
+
+## Model 2##
+form <- as.formula(paste0("cbind(", paste(numericvar, collapse = ","),") ~ 1")
+fit_grid <- map_df(1:6, function(k){
++     set.seed(100 + k)
++     mod1 <- poLCA(form, data = newdata, nclass = k, nrep = 20, verbose = FALSE)
++     tibble(k =k, bic = mod1$bic, aic = mod1$aic, logLik = mod1$llik, npar = mod1$npar)
++     })
+print(fit_grid)
+fit_grid_long <- pivot_longer(
++     fit_grid,
++     cols = c(bic, aic),
++     names_to = "criterion",
++     values_to = "value"
++ )
+> 
+> ggplot(fit_grid_long, aes(x = k, y = value, color = criterion)) +
++     geom_line() +
++     geom_point() +
++     labs(
++         x = "Number of Classes",
++         y = "Fit Statistic",
++         title = "LCA Model Fit Comparison"
++     ) +
++     theme_minimal()
+
+## Model 2a##
+fit_grid1 <- map_df(1:12, function(k){
++     set.seed(100 + k)
++     mod1 <- poLCA(form, data = newdata, nclass = k, nrep = 20, verbose = FALSE)
++     tibble(k =k, bic = mod1$bic, aic = mod1$aic, logLik = mod1$llik, npar = mod1$npar)
++     })
