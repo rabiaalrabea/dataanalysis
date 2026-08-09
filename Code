@@ -239,12 +239,13 @@ datalca$age <- as.integer(datalca$age)
 ### Fit models with poLCA ###
 
 ### Method  ###
-### Model ###
 #Ref: https://www.youtube.com/watch?v=KH2UJbtFaYg
 ## Turn Numeric variables into factors ## 
 newdata <- datalca
 numericvarf <- c("age", "female", "com_arr", "com_cad", "com_cbvd", "com_diab", "com_hf", "com_hyp", "com_mal", "ihe_ctr", "lab_bmi", "lab_crp", "lab_egfr", "lab_gluc_nf", "lab_hb", "med_aht", "med_ata", "med_gla", "med_ims", "med_lla", "med_ntd", "aki_stage")
+newdata[numericvarf] <- lapply(newdata[numericvarf], as.factor)
 
+### Fit model ###
 form <- as.formula(paste0("cbind(", paste(numericvarf, collapse = ","),") ~ 1"))
 
 fit_gridf <- map_df(1:12, function(k){
@@ -271,4 +272,5 @@ fit_grid_longf <- pivot_longer(
 + ) 
 > theme_minimal()
 
-
+### Fit model with the Selected 4 classes ###
+final_model = poLCA(form, data = newdata, nclass = 4, maxiter = 5000, nrep = 20, verbose = TRUE)
