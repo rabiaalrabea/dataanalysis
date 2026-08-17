@@ -272,5 +272,15 @@ fit_grid_longf <- pivot_longer(
 + ) 
 > theme_minimal()
 
+
+
 ### Fit model with the Selected 4 classes ###
 final_model = poLCA(form, data = newdata, nclass = 4, maxiter = 5000, nrep = 20, verbose = TRUE)
+
+### Save the predicted class assignment to the dataset ###
+##Ref: https://atm.amegroups.org/article/view/18822/html##
+newdata$predicted_class <- final_model$predclass
+
+### Make a table for death vs. class ###
+table(newdata$death, newdata$predicted_class)
+
