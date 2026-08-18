@@ -281,6 +281,22 @@ final_model = poLCA(form, data = newdata, nclass = 4, maxiter = 5000, nrep = 20,
 ##Ref: https://atm.amegroups.org/article/view/18822/html##
 newdata$predicted_class <- final_model$predclass
 
-### Make a table for death vs. class ###
+### Make a table for death vs. class to get an idea ###
 table(newdata$death, newdata$predicted_class)
+
+### prepare for survival analysis ###
+
+# convert the class variable into factor
+newdata$predicted_class = as.factor(newdata$predicted_class)
+
+
+# Fit a survival curve 
+# Ref: https://bdsr.stephenturner.us/survival.html
+
+sa <- Surv(newdata$tte, newdata$death)
+class(sa)
+
+sfit <- survfit(sa ~ newdata$predicted_class)
+
+summary(sfit)
 
