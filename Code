@@ -292,11 +292,15 @@ newdata$predicted_class = as.factor(newdata$predicted_class)
 
 # Fit a survival curve 
 # Ref: https://bdsr.stephenturner.us/survival.html
-
+library(survival)
 sa <- Surv(newdata$tte, newdata$death)
 class(sa)
 
-sfit <- survfit(sa ~ newdata$predicted_class)
-
+# define the dataset so you can make the kaplan-meier plot
+sfit <- survfit(sa ~ newdata$predicted_class,  data = newdata)
 summary(sfit)
+
+# Kaplan-Meier plot
+library(survminer)
+ggsurvplot(sfit)
 
